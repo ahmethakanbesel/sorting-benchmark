@@ -2,21 +2,45 @@ import java.io.*;
 import java.util.concurrent.TimeUnit;
 
 public class InputGenerator {
-    public static void main(String[] args) {
+    int[] sizes;
+    int[][] ranges;
+
+    public InputGenerator(int[] sizes, int[][] ranges) {
+        this.sizes = sizes;
+        this.ranges = ranges;
+    }
+
+    public void main(String[] args) {
         long startTime = System.nanoTime();
-        int lowerLimit = 0;
-        int upperLimit = 100;
-        int range = upperLimit - lowerLimit + 1;
-        int size = 100;
-        String fileName = "input.txt";
-        StringBuilder outputStr = new StringBuilder();
+        for (int size : sizes) {
+            for (int[] range : ranges) {
+                short[] numbers = generateArray(size, range[0], range[1]);
+                writeToTxt(numbers, String.format("input%d.%d-%d.txt", size, range[0], range[1]));
+                System.out.printf("%d numbers generated in range [%d, %d] and std. deviation is %f.\n", size, range[0], range[1], calculateSD(numbers));
+            }
+        }
+        long endTime = System.nanoTime();
+        long totalTime = endTime - startTime;
+        long elapsedTime = TimeUnit.MILLISECONDS.convert(totalTime, TimeUnit.NANOSECONDS);
+        System.out.printf("\nElapsed time: %dms.", elapsedTime);
+    }
+
+    public static short[] generateArray(int size, int lowest, int highest) {
         short[] numbers = new short[size];
+        int range = highest - lowest + 1;
         for (int i = 0; i < size; i++) {
-            short random = (short) ((short) (Math.random() * range) + lowerLimit);
+            short random = (short) ((short) (Math.random() * range) + lowest);
             numbers[i] = random;
-            String str = Integer.toString(random);
+        }
+        return numbers;
+    }
+
+    public static void writeToTxt(short[] numbers, String fileName) {
+        StringBuilder outputStr = new StringBuilder();
+        for (int i = 0; i < numbers.length; i++) {
+            String str = Integer.toString(numbers[i]);
             outputStr.append(str);
-            if (i != size - 1) {
+            if (i != numbers.length - 1) {
                 outputStr.append("\n");
             }
         }
@@ -33,15 +57,11 @@ public class InputGenerator {
             FileWriter fileWriter = new FileWriter(fileName);
             fileWriter.write(outputStr.toString());
             fileWriter.close();
-            System.out.printf("%d numbers generated with in range [%d, %d] and standard deviation %f.", size, lowerLimit, upperLimit, calculateSD(numbers));
+            //System.out.printf("%d numbers generated with in range [%d, %d] and standard deviation %f.", size, lowerLimit, upperLimit, calculateSD(numbers));
         } catch (IOException e) {
             System.out.println("Could not write to the file.");
             e.printStackTrace();
         }
-        long endTime   = System.nanoTime();
-        long totalTime = endTime - startTime;
-        long elapsedTime = TimeUnit.MILLISECONDS.convert(totalTime, TimeUnit.NANOSECONDS);
-        System.out.printf("\nElapsed time: %dms.", elapsedTime);
     }
 
     public static double calculateSD(short[] numArray) {
@@ -56,4 +76,6 @@ public class InputGenerator {
         }
         return Math.sqrt(standardDeviation / length);
     }
+
+
 }
