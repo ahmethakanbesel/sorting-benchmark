@@ -1,11 +1,9 @@
-import java.util.concurrent.TimeUnit;
-
 public class Timer {
     private long startTime;
     private long endTime;
     private long totalTime;
     private long elapsedTime;
-    private String unit = "ms";
+    private String unit = "ns";
 
     public Timer() {
     }
@@ -19,19 +17,22 @@ public class Timer {
         totalTime = endTime - startTime;
     }
 
-    public void resetTimer(){
+    public void resetTimer() {
         startTime = 0;
         endTime = 0;
         totalTime = 0;
         elapsedTime = 0;
-        unit = "ms";
+        unit = "ns";
     }
 
     public long getElapsedTime() {
-        elapsedTime = TimeUnit.MILLISECONDS.convert(totalTime, TimeUnit.NANOSECONDS);
-        if (elapsedTime > 1000) {
-            elapsedTime = TimeUnit.SECONDS.convert(totalTime, TimeUnit.NANOSECONDS);
-            unit = "s";
+        final String[] units = {"ns", "ms", "s"};
+        int i = 0;
+        elapsedTime = totalTime;
+        while (elapsedTime > 1000 && i < 3) {
+            elapsedTime /= 1000;
+            unit = units[i];
+            i++;
         }
         return elapsedTime;
     }
