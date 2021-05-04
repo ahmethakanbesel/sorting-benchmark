@@ -1,5 +1,5 @@
 public class InsertionSort implements SortingAlgorithm {
-    int basicOperations = 0;
+    long basicOperations = 0;
     int arrayLength = 0;
 
     @Override
@@ -22,7 +22,7 @@ public class InsertionSort implements SortingAlgorithm {
     }
 
     @Override
-    public int getBasicOperations(){
+    public long getBasicOperations(){
         return basicOperations;
     }
 }

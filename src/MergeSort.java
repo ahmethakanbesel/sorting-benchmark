@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 public class MergeSort implements SortingAlgorithm {
-    int basicOperations = 0;
+    long basicOperations = 0;
     int arrayLength = 0;
 
     @Override
@@ -73,7 +73,7 @@ public class MergeSort implements SortingAlgorithm {
     }
 
     @Override
-    public int getBasicOperations(){
+    public long getBasicOperations(){
         return basicOperations;
     }
 }

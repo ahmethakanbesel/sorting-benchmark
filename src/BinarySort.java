@@ -1,5 +1,5 @@
 public class BinarySort implements SortingAlgorithm {
-    int basicOperations = 0;
+    long basicOperations = 0;
     int arrayLength = 0;
 
     public int[] sort(int[] array) {
@@ -32,7 +32,7 @@ public class BinarySort implements SortingAlgorithm {
     }
 
     @Override
-    public int getBasicOperations() {
+    public long getBasicOperations() {
         return basicOperations;
     }
 }
