@@ -26,11 +26,11 @@ public class Timer {
     }
 
     public long getElapsedTime() {
-        final String[] units = {"ns", "ms", "s"};
+        final String[] units = {"ms", "s"};
         int i = 0;
         elapsedTime = totalTime;
-        while (elapsedTime > 1000 && i < 3) {
-            elapsedTime /= 1000;
+        while (elapsedTime > 1000000 && i < 2) {
+            elapsedTime /= 1000000;
             unit = units[i];
             i++;
         }
