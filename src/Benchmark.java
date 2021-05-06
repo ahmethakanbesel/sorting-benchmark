@@ -30,6 +30,7 @@ public class Benchmark {
             timer.stopTimer();
             totalTime += timer.getTotalTime();
             timer.resetTimer();
+            //resetNumbers();
             numbers = Arrays.copyOf(numbersUnsorted, inputSize);
         }
         elapsedTime = totalTime / iterations;
@@ -37,6 +38,10 @@ public class Benchmark {
 
     public long getElapsedTime(){
         return elapsedTime;
+    }
+
+    public long getBasicOperations(){
+        return algorithm.getBasicOperations();
     }
 
     private void readInputFile() {

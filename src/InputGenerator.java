@@ -2,27 +2,24 @@ import java.io.*;
 import java.util.concurrent.TimeUnit;
 
 public class InputGenerator {
-    int[] sizes;
-    int[][] ranges;
+    static int[] sizes;
+    static int[][] ranges;
 
-    public InputGenerator(int[] sizes, int[][] ranges) {
-        this.sizes = sizes;
-        this.ranges = ranges;
-    }
-
-    public void main(String[] args) {
+    public static void main(String[] args) {
+        sizes = Main.sizes;
+        ranges = Main.ranges;
         long startTime = System.nanoTime();
         for (int size : sizes) {
             for (int[] range : ranges) {
                 short[] numbers = generateArray(size, range[0], range[1]);
                 writeToTxt(numbers, String.format("input%d.%d-%d.txt", size, range[0], range[1]));
-                System.out.printf("%d numbers generated in range [%d, %d] and std. deviation is %f.\n", size, range[0], range[1], calculateSD(numbers));
+                //System.out.printf("%d numbers generated in range [%d, %d] and std. deviation is %f.\n", size, range[0], range[1], calculateSD(numbers));
             }
         }
         long endTime = System.nanoTime();
         long totalTime = endTime - startTime;
         long elapsedTime = TimeUnit.MILLISECONDS.convert(totalTime, TimeUnit.NANOSECONDS);
-        System.out.printf("\nElapsed time: %dms.", elapsedTime);
+        //System.out.printf("\nElapsed time: %dms.", elapsedTime);
     }
 
     public static short[] generateArray(int size, int lowest, int highest) {
