@@ -6,7 +6,7 @@ public class Main {
     final static int[] sizes = {10, 99, 100, 1000, 10001};
     final static int[][] ranges = {{0, 100}, {0, 1000}, {0, 10000}};
     final static String[] inputFiles = new String[ranges.length];
-    final static int iterations = 10;
+    final static int iterations = 100;
     final static SortingAlgorithm[] algorithms = {new HeapSort(), new QuickSort(), new QuickSort3(), new BinarySort(), new CountingSort(), new MergeSort(), new InsertionSort()};
     static long[][] results = new long[algorithms.length][sizes.length * ranges.length]; // To keep running time
     static long[][] results2 = new long[algorithms.length][sizes.length * ranges.length]; // To keep count of basic operations
