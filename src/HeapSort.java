@@ -30,18 +30,18 @@ public class HeapSort implements SortingAlgorithm {
                 swap(array, largest, i);
                 i = largest;
             } else break;
+            basicOperations++;
         }
     }
 
-    private void swap(int[] ar, int i, int j) {
-        int tmp = ar[i];
-        ar[i] = ar[j];
-        ar[j] = tmp;
-        basicOperations++;
+    private void swap(int[] array, int i, int j) {
+        int tmp = array[i];
+        array[i] = array[j];
+        array[j] = tmp;
     }
 
     @Override
-    public long getBasicOperations(){
+    public long getBasicOperations() {
         return basicOperations;
     }
 }

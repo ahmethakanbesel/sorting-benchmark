@@ -20,7 +20,7 @@ public class CountingSort implements SortingAlgorithm {
         for (int i = 0; i < arrayLength; i++) {
             count[array[i] - min]++;
         }
-        for (int i = 1; i < range; i++){
+        for (int i = 1; i < range; i++) {
             count[i] += count[i - 1];
         }
         int j = 0;
@@ -38,7 +38,7 @@ public class CountingSort implements SortingAlgorithm {
     }
 
     @Override
-    public long getBasicOperations(){
+    public long getBasicOperations() {
         return basicOperations;
     }
 }
